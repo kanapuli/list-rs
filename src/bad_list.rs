@@ -2,7 +2,6 @@ struct Node {
     elem: i32,
     next: Link,
 }
-//pub allows this enum to be publicly available
 enum Link {
     Empty,
     //First approach was Elem(i32, List)
@@ -13,6 +12,14 @@ enum Link {
     More(Box<Node>),
 }
 
+//pub allows this struct to be publicly available
 pub struct List {
     head: Link,
+}
+
+//Implementation for the struct List
+impl List {
+    pub fn new() -> Self {
+        List { head: Link::Empty }
+    }
 }
