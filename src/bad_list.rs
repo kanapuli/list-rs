@@ -6,7 +6,7 @@ struct Node {
 enum Link {
     Empty,
     //First approach was Elem(i32, List)
-    //But since List size depends on the elemnts it contains
+    //But since List size depends on the elements it contains
     //So when List is recursively mentioned, rust complains
     //Hence use a Box, which allocates a defined memory size
     // in heap and returns the ownership.
@@ -38,13 +38,16 @@ impl List {
     }
 
     pub fn pop(&mut self) -> Option<i32> {
-        match self.head {
+        let result;
+        match mem::replace(&mut self.head, Link::Empty) {
             Link::Empty => {
-                //todo
+                result = None;
             }
-            Link::More => {
-                //todo
+            Link::More(node) => {
+                result = Some(node.elem);
+                self.head = node.next;
             }
-        }
+        };
+        result
     }
 }
