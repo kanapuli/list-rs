@@ -36,4 +36,15 @@ impl List {
         });
         self.head = Link::More(node);
     }
+
+    pub fn pop(&mut self) -> Option<i32> {
+        match self.head {
+            Link::Empty => {
+                //todo
+            }
+            Link::More => {
+                //todo
+            }
+        }
+    }
 }
