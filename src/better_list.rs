@@ -24,4 +24,14 @@ impl List {
         });
         self.head = new_node;
     }
+    pub fn pop() -> Option<i32> {
+        match mem::replace(&mut self.head, None) {
+            None => None,
+            Some(node) => {
+                self.head = node.next,
+                Some(node.elem)
+            }
+        }
+    }
 }
+
