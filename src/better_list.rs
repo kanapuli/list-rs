@@ -24,9 +24,9 @@ impl List {
         });
         self.head = Some(new_node);
     }
-    pub fn pop() -> Option<i32> {
+    pub fn pop(&mut self) -> Option<i32> {
         self.head.take().map(|node| {
-            self.head = node.next,
+            self.head = node.next;
             node.elem
         })
     }
@@ -38,5 +38,27 @@ impl Drop for List {
         while let Some(mut boxed_node) = cur_link {
             cur_link = boxed_node.next.take();
         }
+    }
+}
+
+mod test {
+    use super::List;
+    #[test]
+    fn basics() {
+        let mut list = List::new();
+
+        list.push(1);
+        list.push(2);
+        list.push(3);
+        list.push(4);
+        list.push(5);
+
+        assert_eq!(list.pop(), Some(5));
+        assert_eq!(list.pop(), Some(4));
+        assert_eq!(list.pop(), Some(3));
+        assert_eq!(list.pop(), Some(2));
+        assert_eq!(list.pop(), Some(1));
+        //If uncommented, this should make test fail
+        //assert_eq!(list.pop(), Some(1));
     }
 }
