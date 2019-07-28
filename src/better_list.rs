@@ -25,13 +25,10 @@ impl List {
         self.head = Some(new_node);
     }
     pub fn pop() -> Option<i32> {
-        match self.head.take() {
-            None => None,
-            Some(node) => {
-                self.head = node.next,
-                Some(node.elem)
-            }
-        }
+        self.head.take().map(|node| {
+            self.head = node.next,
+            node.elem
+        })
     }
 }
 
