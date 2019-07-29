@@ -1,15 +1,15 @@
 use std::mem;
 
-pub struct List {
-    head: Link,
+pub struct List<T> {
+    head: Link<T>,
 }
 
 //type Aliases
-type Link = Option<Box<Node>>;
+type Link<T> = Option<Box<Node<T>>>;
 
 struct Node {
-    elem: i32,
-    next: Link,
+    elem: T,
+    next: Link<T>,
 }
 
 impl List {
