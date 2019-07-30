@@ -40,6 +40,10 @@ impl<T> List<T> {
         //Hence as ref is used which pushes a reference inside map
         self.head.as_ref().map(|node| &node.elem)
     }
+    pub fn peek_mut(&mut self) -> Option<&mut T> {
+        //as_mut pushes a muutable reference inside map
+        self.head.as_mut().map(|node| &mut node.elem)
+    }
 }
 
 impl<T> Drop for List<T> {
