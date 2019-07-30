@@ -30,6 +30,16 @@ impl<T> List<T> {
             node.elem
         })
     }
+
+    pub fn peek(&mut self) -> Option<&T> {
+        //previous code
+        //self.head.map(|node|&node.elem)
+        //This doesn't run because self.head flows by value
+        //inside map and hence we can't return a reference.
+        //This is moving out of borrowed content
+        //Hence as ref is used which pushes a reference inside map
+        self.head.as_ref().map(|node| &node.elem)
+    }
 }
 
 impl<T> Drop for List<T> {
