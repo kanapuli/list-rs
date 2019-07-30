@@ -75,4 +75,16 @@ mod test {
         //If uncommented, this should make test fail
         //assert_eq!(list.pop(), Some(1));
     }
+    #[test]
+    fn peek() {
+        let mut list = List::new();
+        list.push(1);
+        list.push(2);
+        list.push(3);
+        list.push(4);
+        assert_eq!(list.peek(), Some(&4));
+        assert_eq!(list.peek_mut(), Some(&mut 4));
+        list.peek_mut().map(|node| *node = 10);
+        assert_eq!(list.peek_mut(), Some(&mut 10));
+    }
 }
