@@ -57,13 +57,20 @@ impl<T> Drop for List<T> {
 //Tuple structs are alternative form of structs
 //useful of trivial wrappers around other types
 pub struct IntoIter<T>(List<T>);
+
+//Implement intoiter for List<T>
 impl<T> List<T> {
     pub fn into_iter(self) -> IntoIter<T> {
         IntoIter(self)
     }
 }
 
-impl<T> Iterator for IntoIter<T> {}
+impl<T> Iterator for IntoIter<T> {
+    type Item = T;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.pop()
+    }
+}
 mod test {
     use super::List;
     #[test]
