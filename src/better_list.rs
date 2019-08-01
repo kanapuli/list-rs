@@ -54,7 +54,16 @@ impl<T> Drop for List<T> {
         }
     }
 }
+//Tuple structs are alternative form of structs
+//useful of trivial wrappers around other types
+pub struct IntoIter<T>(List<T>);
+impl<T> List<T> {
+    pub fn into_iter(self) -> IntoIter<T> {
+        IntoIter(self)
+    }
+}
 
+impl<T> Iterator for IntoIter<T> {}
 mod test {
     use super::List;
     #[test]
